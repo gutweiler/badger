@@ -19,9 +19,9 @@ package badger
 import (
 	"sync"
 
-	"github.com/dgraph-io/badger/pb"
-	"github.com/dgraph-io/badger/trie"
-	"github.com/dgraph-io/badger/y"
+	"github.com/gutweiler/badger/pb"
+	"github.com/gutweiler/badger/trie"
+	"github.com/gutweiler/badger/y"
 )
 
 type subscriber struct {

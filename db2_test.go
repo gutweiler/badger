@@ -31,10 +31,10 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/dgraph-io/badger/options"
-	"github.com/dgraph-io/badger/pb"
-	"github.com/dgraph-io/badger/table"
-	"github.com/dgraph-io/badger/y"
+	"github.com/gutweiler/badger/options"
+	"github.com/gutweiler/badger/pb"
+	"github.com/gutweiler/badger/table"
+	"github.com/gutweiler/badger/y"
 	"github.com/stretchr/testify/require"
 )
 
@@ -337,7 +337,7 @@ func TestPushValueLogLimit(t *testing.T) {
 	})
 }
 
-// Regression test for https://github.com/dgraph-io/badger/issues/830
+// Regression test for https://github.com/gutweiler/badger/issues/830
 func TestDiscardMapTooBig(t *testing.T) {
 	createDiscardStats := func() map[uint32]int64 {
 		stat := map[uint32]int64{}
@@ -518,7 +518,7 @@ func createTableWithRange(t *testing.T, db *DB, start, end int) *table.Table {
 	return tab
 }
 
-// Regression test for https://github.com/dgraph-io/badger/issues/1126
+// Regression test for https://github.com/gutweiler/badger/issues/1126
 //
 // The test has 3 steps
 // Step 1 - Create badger data. It is necessary that the value size is

@@ -28,8 +28,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dgraph-io/badger/options"
-	"github.com/dgraph-io/badger/y"
+	"github.com/gutweiler/badger/options"
+	"github.com/gutweiler/badger/y"
 	humanize "github.com/dustin/go-humanize"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/net/trace"
@@ -951,7 +951,7 @@ func BenchmarkReadWrite(b *testing.B) {
 	}
 }
 
-// Regression test for https://github.com/dgraph-io/badger/issues/817
+// Regression test for https://github.com/gutweiler/badger/issues/817
 func TestValueLogTruncate(t *testing.T) {
 	dir, err := ioutil.TempDir("", "badger-test")
 	require.NoError(t, err)
@@ -1001,7 +1001,7 @@ func TestValueLogTruncate(t *testing.T) {
 	require.NoError(t, db.Close())
 }
 
-// Regression test for https://github.com/dgraph-io/badger/issues/926
+// Regression test for https://github.com/gutweiler/badger/issues/926
 func TestDiscardStatsMove(t *testing.T) {
 	dir, err := ioutil.TempDir("", "badger-test")
 	require.NoError(t, err)
@@ -1121,7 +1121,7 @@ func TestBlockedDiscardStats(t *testing.T) {
 	require.NoError(t, db.Close())
 }
 
-// Regression test for https://github.com/dgraph-io/badger/issues/970
+// Regression test for https://github.com/gutweiler/badger/issues/970
 func TestBlockedDiscardStatsOnClose(t *testing.T) {
 	dir, err := ioutil.TempDir("", "badger-test")
 	require.NoError(t, err)
@@ -1166,7 +1166,7 @@ func TestValueEntryChecksum(t *testing.T) {
 
 		require.NoError(t, db.Close())
 	})
-	// Regression test for https://github.com/dgraph-io/badger/issues/1049
+	// Regression test for https://github.com/gutweiler/badger/issues/1049
 	t.Run("Corruption", func(t *testing.T) {
 		dir, err := ioutil.TempDir("", "badger-test")
 		require.NoError(t, err)

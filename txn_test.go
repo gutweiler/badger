@@ -25,8 +25,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dgraph-io/badger/options"
-	"github.com/dgraph-io/badger/y"
+	"github.com/gutweiler/badger/options"
+	"github.com/gutweiler/badger/y"
 
 	"github.com/stretchr/testify/require"
 )

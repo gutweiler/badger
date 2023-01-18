@@ -20,7 +20,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/dgraph-io/badger/y"
+	"github.com/gutweiler/badger/y"
 	"github.com/pkg/errors"
 )
 

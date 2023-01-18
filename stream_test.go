@@ -25,8 +25,8 @@ import (
 	"strings"
 	"testing"
 
-	bpb "github.com/dgraph-io/badger/pb"
-	"github.com/dgraph-io/badger/y"
+	bpb "github.com/gutweiler/badger/pb"
+	"github.com/gutweiler/badger/y"
 	"github.com/stretchr/testify/require"
 )
 

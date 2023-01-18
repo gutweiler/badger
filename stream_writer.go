@@ -21,9 +21,9 @@ import (
 	"math"
 	"sync"
 
-	"github.com/dgraph-io/badger/pb"
-	"github.com/dgraph-io/badger/table"
-	"github.com/dgraph-io/badger/y"
+	"github.com/gutweiler/badger/pb"
+	"github.com/gutweiler/badger/table"
+	"github.com/gutweiler/badger/y"
 	humanize "github.com/dustin/go-humanize"
 	"github.com/pkg/errors"
 )

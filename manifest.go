@@ -27,8 +27,8 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/dgraph-io/badger/pb"
-	"github.com/dgraph-io/badger/y"
+	"github.com/gutweiler/badger/pb"
+	"github.com/gutweiler/badger/y"
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
 )
@@ -346,7 +346,7 @@ func ReplayManifestFile(fp *os.File) (Manifest, int64, error) {
 		return Manifest{}, 0,
 			//nolint:lll
 			fmt.Errorf("manifest has unsupported version: %d (we support %d).\n"+
-				"Please see https://github.com/dgraph-io/badger/blob/master/README.md#i-see-manifest-has-unsupported-version-x-we-support-y-error"+
+				"Please see https://github.com/gutweiler/badger/blob/master/README.md#i-see-manifest-has-unsupported-version-x-we-support-y-error"+
 				" on how to fix this.",
 				version, magicVersion)
 	}

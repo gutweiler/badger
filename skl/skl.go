@@ -37,7 +37,7 @@ import (
 	"sync/atomic"
 	"unsafe"
 
-	"github.com/dgraph-io/badger/y"
+	"github.com/gutweiler/badger/y"
 	"github.com/dgraph-io/ristretto/z"
 )
 
