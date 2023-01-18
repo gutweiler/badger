@@ -330,6 +330,16 @@ func (s *levelsController) startCompact(lc *y.Closer) {
 }
 
 func (s *levelsController) runWorker(lc *y.Closer) {
+
+	defer func() {
+		if r := recover(); r != nil {
+			s.kv.opt.Debugf("badger %s recovered: %s", s.kv.opt.ValueDir, r)
+			if err, ok := r.(error); ok {
+				s.kv.opt.Debugf("error: %v", err.Error())
+			}
+		}
+	}()
+
 	defer lc.Done()
 
 	randomDelay := time.NewTimer(time.Duration(rand.Int31n(1000)) * time.Millisecond)
@@ -449,6 +459,10 @@ func (s *levelsController) compactBuildTables(
 	// value log file should be GCed.
 	discardStats := make(map[uint32]int64)
 	updateStats := func(vs y.ValueStruct) {
+		if len(vs.Value) < 12 {
+			// s.kv.opt.Debugf("vs.Value: %+v", vs.Value)
+			return
+		}
 		if vs.Meta&bitValuePointer > 0 {
 			var vp valuePointer
 			vp.Decode(vs.Value)

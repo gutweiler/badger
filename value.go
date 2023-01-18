@@ -1593,6 +1593,10 @@ func (vlog *valueLog) populateDiscardStats() error {
 			vlog.opt.Debugf("Value log discard stats empty")
 			return nil
 		}
+		if len(vs.Value) < 12 {
+			// vlog.opt.Debugf("vs.Value smaller than the 12 bytes that vp.Decode expects")
+			break
+		}
 		vp.Decode(vs.Value)
 		// Entry stored in LSM tree.
 		if vs.Meta&bitValuePointer == 0 {

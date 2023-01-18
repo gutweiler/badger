@@ -1,0 +1,47 @@
+diff --git b/vendor/github.com/dgraph-io/badger/levels.go a/vendor/github.com/dgraph-io/badger/levels.go
+index e68d57cd..ffb262b1 100644
+--- b/vendor/github.com/dgraph-io/badger/levels.go
++++ a/vendor/github.com/dgraph-io/badger/levels.go
+@@ -330,6 +330,16 @@ func (s *levelsController) startCompact(lc *y.Closer) {
+ }
+ 
+ func (s *levelsController) runWorker(lc *y.Closer) {
++
++	defer func() {
++		if r := recover(); r != nil {
++			s.kv.opt.Debugf("badger %s recovered: %s", s.kv.opt.ValueDir, r)
++			if err, ok := r.(error); ok {
++				s.kv.opt.Debugf("error: %v", err.Error())
++			}
++		}
++	}()
++
+ 	defer lc.Done()
+ 
+ 	randomDelay := time.NewTimer(time.Duration(rand.Int31n(1000)) * time.Millisecond)
+@@ -449,6 +459,10 @@ func (s *levelsController) compactBuildTables(
+ 	// value log file should be GCed.
+ 	discardStats := make(map[uint32]int64)
+ 	updateStats := func(vs y.ValueStruct) {
++		if len(vs.Value) < 12 {
++			// s.kv.opt.Debugf("vs.Value: %+v", vs.Value)
++			return
++		}
+ 		if vs.Meta&bitValuePointer > 0 {
+ 			var vp valuePointer
+ 			vp.Decode(vs.Value)
+diff --git b/vendor/github.com/dgraph-io/badger/value.go a/vendor/github.com/dgraph-io/badger/value.go
+index e2dcc2e3..8c8e8e5c 100644
+--- b/vendor/github.com/dgraph-io/badger/value.go
++++ a/vendor/github.com/dgraph-io/badger/value.go
+@@ -1593,6 +1593,10 @@ func (vlog *valueLog) populateDiscardStats() error {
+ 			vlog.opt.Debugf("Value log discard stats empty")
+ 			return nil
+ 		}
++		if len(vs.Value) < 12 {
++			// vlog.opt.Debugf("vs.Value smaller than the 12 bytes that vp.Decode expects")
++			break
++		}
+ 		vp.Decode(vs.Value)
+ 		// Entry stored in LSM tree.
+ 		if vs.Meta&bitValuePointer == 0 {
